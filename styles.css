@@ -157,4 +157,26 @@ button:hover { background: var(--ink-soft); }
   .sec { grid-template-columns: minmax(0, 1fr); }
   .sec h2 { margin-bottom: .75rem; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* Motion: the hero enters once on load; links and buttons answer the pointer */
+@keyframes enter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.hero h1 span { animation: enter .8s cubic-bezier(.2, .7, .2, 1) both; }
+.hero h1 span + span { animation-delay: .08s; }
+.hero p { animation: enter .8s cubic-bezier(.2, .7, .2, 1) .2s both; }
+.hero img { animation: fade 1.2s ease .1s both; }
+
+.top > a {
+  padding-bottom: 2px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+  transition: background-size .25s ease;
+}
+.top > a:hover { text-decoration: none; background-size: 100% 1px; }
+.lang-switch a { transition: background-color .2s ease, color .2s ease; }
+.lang-switch a:not([aria-current]):hover { text-decoration: none; background: var(--wall-pale); }
+button { transition: background-color .2s ease, transform .15s ease; }
+button:active { transform: scale(.96); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
