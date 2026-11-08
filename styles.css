@@ -120,13 +120,13 @@ a { color: inherit; }
 .skills h3 { margin: 0 0 .75rem; font-size: .9375rem; font-weight: 600; color: var(--ink-soft); }
 .skills ul {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 0 1.5rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: 0 2rem;
 }
 .skills li {
   padding-block: .6rem;
   border-top: 1px solid var(--wall-pale);
   font-family: var(--display); font-size: 1.25rem; font-weight: 500; line-height: 1.25;
-  hyphens: auto; overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .langs { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1rem 1.5rem; }
