@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../styles.css?v=4">
 </head>
 <body>
 
@@ -193,7 +193,12 @@
       <section class="sec" id="tempo-libero">
         <h2>Tempo libero</h2>
         <div class="body">
-          <p>Sci, hockey su ghiaccio e tennis, che gioco dal 2007. Fino al 2023 ho anche giocato a calcio.</p>
+          <ul class="hobbies">
+            <li><b>Sci</b><span>Maestro di sci a St. Moritz, 2021–22</span></li>
+            <li><b>Tennis</b><span>Dal 2007</span></li>
+            <li><b>Hockey su ghiaccio</b></li>
+            <li><b>Calcio</b><span>Giocato fino al 2023</span></li>
+          </ul>
         </div>
       </section>
 
@@ -201,8 +206,9 @@
         <h2>Contatto</h2>
         <div class="body">
           <div class="contact">
-            <span class="addr" id="email">elia.marcoli@uzh.ch</span>
-            <button type="button" id="copy" data-done="Copiata" data-fallback="Premi Ctrl+C per copiare">Copia email</button>
+            <a class="addr" id="email" href="mailto:elia.marcoli@uzh.ch">elia.marcoli@uzh.ch</a>
+            <button type="button" class="copy" id="copy" aria-label="Copia email" title="Copia email" data-done="Copiata" data-fallback="Premi Ctrl+C per copiare"><svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><svg class="i-done" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>
+            <span class="copy-status" id="copy-status" role="status"></span>
           </div>
           <p class="place">Zurigo, Svizzera</p>
         </div>
@@ -214,20 +220,24 @@
 <script>
   const btn = document.getElementById('copy');
   const addr = document.getElementById('email');
-  const label = btn.textContent;
+  const status = document.getElementById('copy-status');
+  const label = btn.getAttribute('aria-label');
+  let timer;
   btn.addEventListener('click', async () => {
+    clearTimeout(timer);
     try {
-      await navigator.clipboard.writeText(addr.textContent);
-      btn.textContent = btn.dataset.done;
+      await navigator.clipboard.writeText(addr.textContent.trim());
+      btn.classList.add('done');
+      status.textContent = btn.dataset.done;
     } catch (e) {
       const range = document.createRange();
       range.selectNodeContents(addr);
       const sel = getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
-      btn.textContent = btn.dataset.fallback;
+      status.textContent = btn.dataset.fallback;
     }
-    setTimeout(() => { btn.textContent = label; }, 2500);
+    timer = setTimeout(() => { btn.classList.remove('done'); status.textContent = ''; btn.setAttribute('aria-label', label); }, 2200);
   });
 </script>
 </body>
