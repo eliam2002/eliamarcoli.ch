@@ -133,15 +133,31 @@ a { color: inherit; }
 .langs b { display: block; font-family: var(--display); font-size: 1.75rem; font-weight: 500; line-height: 1.15; }
 .langs span { font-size: .9375rem; color: var(--ink-soft); }
 
-.contact { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
-.addr { font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 500; overflow-wrap: anywhere; min-width: 0; }
-button {
-  font: inherit; font-size: .9375rem; font-weight: 600;
-  color: var(--paper); background: var(--ink);
-  border: 0; border-radius: 999px;
-  padding: .45rem 1rem; cursor: pointer;
+.hobbies { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 0 2rem; }
+.hobbies li { padding-block: .6rem; border-top: 1px solid var(--wall-pale); }
+.hobbies b { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 500; line-height: 1.2; }
+.hobbies span { font-size: .9375rem; color: var(--ink-soft); }
+
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; }
+.addr {
+  font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 500;
+  text-decoration: none; overflow-wrap: anywhere; min-width: 0;
+  background: linear-gradient(currentColor, currentColor) left 92% / 0 1px no-repeat;
+  transition: background-size .3s ease;
 }
-button:hover { background: var(--ink-soft); }
+.addr:hover { background-size: 100% 1px; }
+.copy {
+  display: inline-grid; place-items: center;
+  width: 2.75rem; height: 2.75rem; padding: 0;
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--wall); border-radius: 50%; cursor: pointer;
+}
+.copy svg { grid-area: 1 / 1; width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; transition: opacity .2s ease, transform .2s ease; }
+.copy .i-done { opacity: 0; transform: scale(.6); }
+.copy.done .i-copy { opacity: 0; transform: scale(.6); }
+.copy.done .i-done { opacity: 1; transform: none; }
+.copy:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.copy-status { font-size: .9375rem; color: var(--ink-soft); }
 
 @media (max-width: 820px) {
   .hero .wrap { min-height: 0; gap: 2rem; padding-block-end: 1.5rem; }
@@ -173,8 +189,8 @@ button:hover { background: var(--ink-soft); }
 .top > a:hover { text-decoration: none; background-size: 100% 1px; }
 .lang-switch a { transition: background-color .2s ease, color .2s ease; }
 .lang-switch a:not([aria-current]):hover { text-decoration: none; background: var(--wall-pale); }
-button { transition: background-color .2s ease, transform .15s ease; }
-button:active { transform: scale(.96); }
+.copy { transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .15s ease; }
+.copy:active { transform: scale(.92); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
